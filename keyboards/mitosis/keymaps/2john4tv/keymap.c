@@ -11,11 +11,11 @@ enum mitosis_keycodes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // LETTERS
   [0] = {
-    {_______,     KC_W,        KC_F,          KC_P,       _______,     _______,          KC_L,       KC_U,         KC_Y,         _______      },
-    {LT(6,KC_A),  LT(2,KC_R),  LT(8,KC_S),    LT(3,KC_T), KC_D,        KC_H,             LT(7,KC_N), LT(8,KC_E),   LT(2,KC_I),   LT(4,KC_O)   },
-    {CTL_T(KC_Z), ALT_T(KC_X), GUI_T(KC_C),   KC_G,       KC_B,        KC_K,             LT(5,KC_M), RGUI_T(KC_J), ALGR_T(KC_Q), RCTL_T(KC_V) },
-    {XXXXXXX,     _______,     _______,       _______,    _______,     _______,          _______,    _______,      _______,      XXXXXXX      },
-    {XXXXXXX,     _______,     SFT_T(KC_TAB), KC_BSPACE,  TT(1),       SFT_T(KC_ESCAPE), KC_ENTER,   KC_SPACE,     KC_F5,        XXXXXXX      }
+    {_______,     KC_W,        KC_F,          KC_P,       _______,              _______,          KC_L,       KC_U,         KC_Y,         _______      },
+    {LT(6,KC_A),  LT(2,KC_R),  LT(8,KC_S),    LT(3,KC_T), KC_D,                 KC_H,             LT(7,KC_N), LT(8,KC_E),   LT(2,KC_I),   LT(4,KC_O)   },
+    {CTL_T(KC_Z), ALT_T(KC_X), GUI_T(KC_C),   KC_G,       KC_B,                 KC_K,             LT(5,KC_M), RGUI_T(KC_J), ALGR_T(KC_Q), RCTL_T(KC_V) },
+    {XXXXXXX,     _______,     _______,       _______,    SFT_T(KC_TAB),        SFT_T(KC_ESCAPE), _______,    _______,      _______,      XXXXXXX      },
+    {XXXXXXX,     _______,     _______,       TT(1),      KC_BSPACE,            KC_SPACE,         KC_ENTER,   KC_F5,        _______,      XXXXXXX      }
   },
 
   // MOUSE & MEDIA
@@ -39,7 +39,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // MODS & ARROWS
   [3] = {
     {_______, _______, _______, _______, _______,     _______, _______, _______, _______, _______  },
-    {KC_LCTL, KC_LALT, KC_LGUI, _______, _______,     _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT },
+    {KC_LCTL, KC_LGUI, KC_LALT, _______, _______,     _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT },
     {_______, _______, _______, _______, _______,     _______, _______, _______, _______, _______  },
     {XXXXXXX, _______, _______, _______, _______,     _______, _______, _______, _______, XXXXXXX  },
     {XXXXXXX, _______, _______, _______, _______,     _______, _______, _______, _______, XXXXXXX  }
@@ -47,8 +47,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   // COPY/PASTE
   [4] = {
-    {_______,    _______,    _______,    _______,    _______,     LGUI(KC_Q), _______, _______, _______, LGUI(KC_W) },
-    {LGUI(KC_Z), LGUI(KC_X), LGUI(KC_C), LGUI(KC_V), _______,     _______,    _______, _______, _______, _______    },
+    {_______,    _______,    _______,    _______,    _______,     RGUI(KC_Q), _______, _______, _______, RGUI(KC_W) },
+    {RGUI(KC_Z), RGUI(KC_X), RGUI(KC_C), RGUI(KC_V), _______,     _______,    _______, _______, _______, _______    },
     {_______,    _______,    _______,    _______,    _______,     _______,    _______, _______, _______, _______    },
     {XXXXXXX,    _______,    _______,    _______,    _______,     _______,    _______, _______, _______, XXXXXXX    },
     {XXXXXXX,    _______,    _______,    _______,    _______,     _______,    _______, _______, _______, XXXXXXX    }
