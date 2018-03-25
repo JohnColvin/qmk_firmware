@@ -11,11 +11,11 @@ enum mitosis_keycodes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // LETTERS
   [0] = {
-    {_______,     KC_W,        KC_F,          KC_P,       _______,              _______,          KC_L,       KC_U,         KC_Y,         _______      },
-    {LT(6,KC_A),  LT(2,KC_R),  LT(8,KC_S),    LT(3,KC_T), KC_D,                 KC_H,             LT(7,KC_N), LT(8,KC_E),   LT(2,KC_I),   LT(4,KC_O)   },
-    {CTL_T(KC_Z), ALT_T(KC_X), GUI_T(KC_C),   KC_G,       KC_B,                 KC_K,             LT(5,KC_M), RGUI_T(KC_J), ALGR_T(KC_Q), RCTL_T(KC_V) },
-    {XXXXXXX,     _______,     _______,       TT(1),      KC_BSPACE,            KC_SPACE,         KC_ENTER,   _______,      _______,      XXXXXXX      },
-    {XXXXXXX,     _______,     _______,       _______,    SFT_T(KC_TAB),        SFT_T(KC_ESCAPE),  _______,   _______,      _______,      XXXXXXX      }
+    {_______,     KC_W,        KC_F,          KC_P,          _______,              _______,   KC_L,             KC_U,         KC_Y,         _______      },
+    {LT(6,KC_A),  LT(2,KC_R),  LT(8,KC_S),    LT(3,KC_T),    KC_D,                 KC_H,      LT(7,KC_N),       LT(8,KC_E),   LT(2,KC_I),   LT(4,KC_O)   },
+    {CTL_T(KC_Z), ALT_T(KC_X), GUI_T(KC_C),   KC_G,          KC_B,                 KC_K,      LT(5,KC_M),       RGUI_T(KC_J), ALGR_T(KC_Q), RCTL_T(KC_V) },
+    {XXXXXXX,     _______,     _______,       SFT_T(KC_TAB), KC_BSPACE,            KC_SPACE,  SFT_T(KC_ESCAPE), _______,      _______,      XXXXXXX      },
+    {XXXXXXX,     _______,     _______,       _______,       TT(1),                KC_ENTER,  _______,          _______,      _______,      XXXXXXX      }
   },
 
   // MOUSE & MEDIA
