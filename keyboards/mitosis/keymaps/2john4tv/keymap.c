@@ -11,16 +11,16 @@ enum mitosis_keycodes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // LETTERS
   [0] = {
-    {_______,     KC_W,        KC_F,          KC_P,          _______,              _______,   KC_L,             KC_U,         KC_Y,         _______      },
+    {RESET,       KC_W,        KC_F,          KC_P,          TT(5),                TT(3),     KC_L,             KC_U,         KC_Y,         MACSLEEP     },
     {LT(6,KC_A),  LT(2,KC_R),  LT(8,KC_S),    LT(3,KC_T),    KC_D,                 KC_H,      LT(7,KC_N),       LT(8,KC_E),   LT(2,KC_I),   LT(4,KC_O)   },
     {CTL_T(KC_Z), ALT_T(KC_X), GUI_T(KC_C),   KC_G,          KC_B,                 KC_K,      LT(5,KC_M),       RGUI_T(KC_J), ALGR_T(KC_Q), RCTL_T(KC_V) },
-    {XXXXXXX,     _______,     _______,       SFT_T(KC_TAB), KC_BSPACE,            KC_SPACE,  SFT_T(KC_ESCAPE), _______,      _______,      XXXXXXX      },
+    {XXXXXXX,     _______,     TT(9),         SFT_T(KC_TAB), KC_BSPACE,            KC_SPACE,  SFT_T(KC_ESCAPE), KC_F5,        _______,      XXXXXXX      },
     {XXXXXXX,     _______,     _______,       _______,       TT(1),                KC_ENTER,  _______,          _______,      _______,      XXXXXXX      }
   },
 
   // MOUSE & MEDIA
   [1] = {
-    {RESET,          KC_MS_WH_UP, KC_MS_UP,   KC_MS_WH_DOWN, _______,           _______, KC_AUDIO_MUTE,       KC_AUDIO_VOL_DOWN,   KC_AUDIO_VOL_UP,     MACSLEEP },
+    {_______,        KC_MS_WH_UP, KC_MS_UP,   KC_MS_WH_DOWN, _______,           _______, KC_AUDIO_MUTE,       KC_AUDIO_VOL_DOWN,   KC_AUDIO_VOL_UP,     _______ },
     {KC_MS_WH_RIGHT, KC_MS_LEFT,  KC_MS_DOWN, KC_MS_RIGHT,   KC_MS_WH_LEFT,     _______, KC_MS_BTN1,          KC_MS_BTN2,          KC_F14,              KC_F15   },
     {_______,        _______,     _______,    _______,       _______,           _______, KC_MEDIA_PREV_TRACK, KC_MEDIA_PLAY_PAUSE, KC_MEDIA_NEXT_TRACK, _______  },
     {XXXXXXX,        _______,     _______,    _______,       _______,           _______, _______,             _______,             _______,             XXXXXXX  },
@@ -88,6 +88,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     {_______, _______,  _______,  KC_TILD,   _______,     _______, KC_PIPE, _______, _______,  _______ },
     {XXXXXXX, _______,  _______,  _______,   _______,     _______, _______, _______, _______,  XXXXXXX },
     {XXXXXXX, _______,  _______,  _______,   _______,     _______, _______, _______, _______,  XXXXXXX }
+  },
+
+  // GAMES
+  [9] = {
+    {KC_TAB,  KC_Q,    KC_W,    KC_E,      KC_R,        _______, _______, _______, _______, _______ },
+    {KC_CAPS, KC_A,    KC_S,    KC_D,      KC_F,        _______, _______, _______, _______, _______ },
+    {KC_LSFT, KC_Z,    KC_X,    KC_C,      KC_V,        _______, _______, _______, _______, _______ },
+    {XXXXXXX, _______, _______, KC_ESCAPE, KC_SPACE,    _______, _______, _______, _______, XXXXXXX },
+    {XXXXXXX, _______, _______, _______,   KC_ENTER,    KC_F5,   _______, _______, _______, XXXXXXX }
   }
 };
 
@@ -115,7 +124,16 @@ void matrix_scan_user(void) {
 
   switch (layer) {
     case 1:
-      set_led_green;
+      set_led_cyan;
+      break;
+    case 3:
+      set_led_yellow;
+      break;
+    case 5:
+      set_led_white;
+      break;
+    case 9:
+      set_led_magenta;
       break;
     default:
       set_led_off;
