@@ -6,15 +6,15 @@
 #include "report.h"
 #include "timer.h"
 
-int hPin = 2;
-int vPin = 3;
-int xPin = 11;
-int yPin = 9;
+// int hPin = 2;
+// int vPin = 3;
+// int xPin = 11;
+// int yPin = 9;
 
-// int hPin = PF4;
-// int vPin = PF5;
-// int xPin = PD7;
-// int yPin = PD4;
+int hPin = A3;
+int vPin = A2;
+int xPin = A6;
+int yPin = A7;
 
 int cursorSensitivity = 50;
 int scrollSensitivity = 200;
