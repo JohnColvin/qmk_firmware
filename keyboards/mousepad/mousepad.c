@@ -92,8 +92,18 @@ void pointing_device_task(void){
     report.h = 0;
     report.v = 0;
   }
+
   report.x = axisToMouseComponent(xPin, xOrigin, maxCursorSpeed, xPolarity);
   report.y = axisToMouseComponent(yPin, yOrigin, maxCursorSpeed, yPolarity);
+
+  report.buttons = 0;
+  if ((PINF&(1<<6)) == 0) {
+    report.buttons |= MOUSE_BTN1;
+  }
+
+  if ((PINC&(1<<6)) == 0) {
+    report.buttons |= MOUSE_BTN2;
+  }
 
   pointing_device_set_report(report);
   pointing_device_send();
@@ -105,4 +115,8 @@ void matrix_init_kb(void) {
   vOrigin = analogRead(vPin);
   xOrigin = analogRead(xPin);
   yOrigin = analogRead(yPin);
+  DDRF  &= ~(1<<6);
+  PORTF |=  (1<<6);
+  DDRC  &= ~(1<<6);
+  PORTC |=  (1<<6);
 }
