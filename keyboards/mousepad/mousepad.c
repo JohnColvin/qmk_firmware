@@ -58,12 +58,15 @@ float axisPercentage(int pin, int origin) {
     }
     range = range * (1 - deadZone);
 
-    float axisPercent = ((float)distanceFromOrigin / range);
-    if (axisPercent < deadZone) {
+    float axisPercent = ((float)distanceFromOrigin / range) - deadZone;
+    if (axisPercent < 0) {
       return 0;
     }
+    else if (axisPercent > 1) {
+      return direction;
+    }
     else {
-      return (axisPercent - deadZone) * direction;
+      return axisPercent * direction;
     }
 }
 
@@ -73,15 +76,6 @@ int axisToMouseComponent(int pin, int origin, int maxSpeed, int polarity) {
 
 void pointing_device_task(void){
   report_mouse_t report;
-
-  // if (timer_elapsed(lastPrint) > 1000) {
-  //   lastPrint = timer_read();
-  //   print_dec(analogRead(xPin));
-  //   println();
-  //   print_dec(analogRead(yPin));
-  //   println();
-  //   println("----------");
-  // }
 
   if (timer_elapsed(lastScroll) > scrollTimeout) {
     lastScroll = timer_read();
