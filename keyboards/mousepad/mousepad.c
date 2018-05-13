@@ -13,7 +13,7 @@
 int maxCursorSpeed = 6;
 int maxScrollSpeed = 5;
 
-int precisionSpeed = 1;
+int precisionSpeed = 5;
 int precisionThreshold = 95;
 
 int minAxisValue = 0;
@@ -25,7 +25,7 @@ int xPolarity = 1;
 int yPolarity = 1;
 
 int scrollTimeout = 50;
-int cursorTimeout = 10;
+int cursorTimeout = 50;
 
 // int hPin = 11;
 // int vPin = 9;
@@ -86,7 +86,8 @@ int axisToMouseComponent(int pin, int origin, int maxSpeed, int polarity) {
   else {
     int direction = (coordinate < 0) ? -1 : 1;
     if (abs(coordinate) < precisionThreshold) {
-      return precisionSpeed * direction * polarity;
+      float percent = (float)coordinate / 100;
+      return percent * precisionSpeed * polarity;
     }
     else {
       // TODO accelerate
