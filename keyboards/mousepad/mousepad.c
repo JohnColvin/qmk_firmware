@@ -1,4 +1,5 @@
 #include "analog.c"
+#include <math.h>
 #include "mousepad.h"
 #include "pincontrol.h"
 #include "pointing_device.h"
@@ -8,8 +9,8 @@
 
 float deadZone = 0.1;
 
-int maxCursorSpeed = 10;
-int maxScrollSpeed = 10;
+int maxCursorSpeed = 6;
+int maxScrollSpeed = 5;
 
 int minAxisValue = 0;
 int maxAxisValue = 1023;
@@ -71,7 +72,21 @@ float axisPercentage(int pin, int origin) {
 }
 
 int axisToMouseComponent(int pin, int origin, int maxSpeed, int polarity) {
-  return (int)(axisPercentage(pin, origin) * maxSpeed * polarity);
+  float percent = axisPercentage(pin, origin);
+
+  if (percent == 0) {
+    return 0;
+  }
+  else {
+    int direction = (percent < 0) ? -1 : 1;
+    if (abs(percent) < .95) {
+      return direction * polarity;
+    }
+    else {
+      // TODO accelerate
+      return 4 * direction * polarity;
+    }
+  }
 }
 
 void pointing_device_task(void){
@@ -87,6 +102,7 @@ void pointing_device_task(void){
     report.v = 0;
   }
 
+  // TODO read as one vector
   report.x = axisToMouseComponent(xPin, xOrigin, maxCursorSpeed, xPolarity);
   report.y = axisToMouseComponent(yPin, yOrigin, maxCursorSpeed, yPolarity);
 
