@@ -7,10 +7,14 @@
 #include "report.h"
 #include "timer.h"
 
-float deadZone = 0.1;
+// TODO dead zone
+// float deadZone = 10;
 
 int maxCursorSpeed = 6;
 int maxScrollSpeed = 5;
+
+int precisionSpeed = 1;
+int precisionThreshold = 95;
 
 int minAxisValue = 0;
 int maxAxisValue = 1023;
@@ -37,7 +41,7 @@ int hOrigin, vOrigin, xOrigin, yOrigin;
 uint16_t lastPrint = 0;
 uint16_t lastScroll = 0;
 
-float axisPercentage(int pin, int origin) {
+int axisCoordinate(int pin, int origin) {
     int direction;
     int distanceFromOrigin;
     int range;
@@ -57,34 +61,34 @@ float axisPercentage(int pin, int origin) {
       range = maxAxisValue - origin;
       direction = 1;
     }
-    range = range * (1 - deadZone);
 
-    float axisPercent = ((float)distanceFromOrigin / range) - deadZone;
-    if (axisPercent < 0) {
+    float percent = (float)distanceFromOrigin / range;
+    int coordinate = (int)(percent * 100);
+    if (coordinate < 0) {
       return 0;
     }
-    else if (axisPercent > 1) {
-      return direction;
+    else if (coordinate > 100) {
+      return 100 * direction;
     }
     else {
-      return axisPercent * direction;
+      return coordinate * direction;
     }
 }
 
 int axisToMouseComponent(int pin, int origin, int maxSpeed, int polarity) {
-  float percent = axisPercentage(pin, origin);
+  int coordinate = axisCoordinate(pin, origin);
 
-  if (percent == 0) {
+  if (coordinate == 0) {
     return 0;
   }
   else {
-    int direction = (percent < 0) ? -1 : 1;
-    if (abs(percent) < .95) {
-      return direction * polarity;
+    int direction = (coordinate < 0) ? -1 : 1;
+    if (abs(coordinate) < precisionThreshold) {
+      return precisionSpeed * direction * polarity;
     }
     else {
       // TODO accelerate
-      return 4 * direction * polarity;
+      return maxCursorSpeed * direction * polarity;
     }
   }
 }
