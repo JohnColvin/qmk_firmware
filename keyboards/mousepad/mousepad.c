@@ -25,6 +25,7 @@ int xPolarity = 1;
 int yPolarity = 1;
 
 int scrollTimeout = 50;
+int cursorTimeout = 10;
 
 // int hPin = 11;
 // int vPin = 9;
@@ -38,6 +39,7 @@ int yPin = A2;
 
 int hOrigin, vOrigin, xOrigin, yOrigin;
 
+uint16_t lastCursor = 0;
 uint16_t lastPrint = 0;
 uint16_t lastScroll = 0;
 
@@ -95,22 +97,25 @@ int axisToMouseComponent(int pin, int origin, int maxSpeed, int polarity) {
 
 void pointing_device_task(void){
   report_mouse_t report;
+  report.h = 0;
+  report.v = 0;
+  report.x = 0;
+  report.y = 0;
+  report.buttons = 0;
 
   if (timer_elapsed(lastScroll) > scrollTimeout) {
     lastScroll = timer_read();
     report.h = axisToMouseComponent(hPin, hOrigin, maxScrollSpeed, hPolarity);
     report.v = axisToMouseComponent(vPin, vOrigin, maxScrollSpeed, vPolarity);
   }
-  else {
-    report.h = 0;
-    report.v = 0;
-  }
 
   // TODO read as one vector
-  report.x = axisToMouseComponent(xPin, xOrigin, maxCursorSpeed, xPolarity);
-  report.y = axisToMouseComponent(yPin, yOrigin, maxCursorSpeed, yPolarity);
+  if (timer_elapsed(lastCursor) > cursorTimeout) {
+    lastCursor = timer_read();
+    report.x = axisToMouseComponent(xPin, xOrigin, maxCursorSpeed, xPolarity);
+    report.y = axisToMouseComponent(yPin, yOrigin, maxCursorSpeed, yPolarity);
+  }
 
-  report.buttons = 0;
   if ((PINF&(1<<6)) == 0) {
     report.buttons |= MOUSE_BTN1;
   }
