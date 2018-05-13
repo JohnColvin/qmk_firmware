@@ -118,11 +118,11 @@ void pointing_device_task(void){
   }
 
   if ((PINF&(1<<6)) == 0) {
-    report.buttons |= MOUSE_BTN1;
+    report.buttons |= MOUSE_BTN2;
   }
 
   if ((PINC&(1<<6)) == 0) {
-    report.buttons |= MOUSE_BTN2;
+    report.buttons |= MOUSE_BTN1;
   }
 
   pointing_device_set_report(report);
